@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>02_模板语法</title>
+</head>
+<body>
+<!--
+1. 模板的理解:
+  动态的html页面
+  包含了一些JS语法代码
+    双大括号表达式
+    指令(以v-开头的自定义标签属性)
+2. 双大括号表达式
+  语法: {{exp}} 或 {{{exp}}}
+  功能: 向页面输出数据
+  可以调用对象的方法
+3. 指令一: 强制数据绑定
+  功能: 指定变化的属性值
+  完整写法:
+    v-bind:xxx='yyy'  //yyy会作为表达式解析执行
+  简洁写法:
+    :xxx='yyy'
+4. 指令二: 绑定事件监听
+  功能: 绑定指定事件名的回调函数
+  完整写法:
+    v-on:click='xxx'
+  简洁写法:
+    @click='xxx'
+-->
+
+<div id="app">
+  <h2>1. 双大括号表达式 | 插值</h2>
+  <p>--{{msg}}---</p>
+  <p>--{{msg.toUpperCase()}}---</p>
+  <p>--{{msg.toUpperCase()}}---</p>
+
+  <h2>2. 指令一: 强制数据绑定</h2> <!-- 属性值是一个动态值 -->
+  <a href="url">去学习</a><br>
+  <a v-bind:href="url">去学习</a><br>
+  <a :href="url">去学习</a><br>
+
+  <h2>3. 指令二: 绑定事件监听</h2>
+  <button v-on:click="test">test1</button>
+  <button @click="test">test1</button>
+
+ <!-- 监视/监听: 回调函数 -->
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+      msg: 'I Will Back!',
+      url: 'http://www.atguigu.com'
+    },
+    methods: {
+      test (event) {
+        alert(event.target.innerText)
+      }
+    },
+  })
+
+  /* 
+  1. 表达式不是一个完整的结构, 需要与其它结构配置才能正常存在, 而语句是可以独立存在的
+  2. 表达式返回一个数据结构, 语句不会返回一个结果(是去做一个特定工作去的)
+  */
+
+  // function fn () {} // 函数是语句
+  // var fn = function (){} // 函数是表达式
+  // (function (){}) ()
+</script>
+
+</body>
+</html>
