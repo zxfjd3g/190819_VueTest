@@ -26,7 +26,61 @@
 
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
+  /* 
+  Object.defineProperty() 方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性
 
+  get () {return value}  // getter   属性的get方法
+  set (value) {} // setter  属性的set方法
+  */
+
+  const p = {
+    firstName: 'A',
+    lastName: 'B'
+  }
+  /* 
+  需求: 
+    1. 给p添加一个新的属性: fullName= firstName + '-' + lastName
+    2. 如果修改了firstName/lastName, fullName自动改变为对应的值
+    3. 如果修改了fullName, firstName和lastName也自动改变为对应的值
+  */
+  // p.fullName = p.firstName + '-' + p.lastName
+
+  Object.defineProperty(p, 'fullName', { // 配置对象  ==> 属性描述符
+    /* 
+    当读取属性值时候自动调用, 将函数的返回值作为属性值, this是属性所在的对象
+    */
+    get () { 
+      console.log('get()', this)
+      return this.firstName + '-' + this.lastName
+    },
+    /* 
+    当修改了属性值时候自动调用, 用来监视属性值的变化, this是属性所在的对象
+    */
+    set (value) { // vlaue是fullName最新的值  E-F
+      console.log('set()', value)
+      // 更新firstName/lastName
+      const names = value.split('-')
+      this.firstName = names[0]
+      this.lastName = names[1]
+    },
+  })
+
+
+  console.log(p.fullName) // A-B
+
+  p.firstName = 'C'
+  p.lastName = 'D'
+  console.log(p.fullName) // C-D 
+
+  p.fullName = 'E-F' // 导致对应的set调用
+  console.log(p.firstName, p.lastName) // E F   C D
+
+  /* 
+  关于回调函数的3个问题
+  1. 什么时候执行?
+  2. 用来做什么的?
+  3. this是谁?
+  */
 </script>
 </body>
 </html>
