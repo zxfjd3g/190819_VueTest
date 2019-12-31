@@ -23,16 +23,71 @@
 <div id="example">
 
   <h2>1. 绑定监听</h2>
+  <button @click="test1">test111</button>
+  <button @click="test2('atguigu')">test222</button>
+  <button @click="test3('atguigu22', $event)">test333</button>
+  <!-- <button @click="($event) => {test3('atguigu22', $event)}">test333</button> -->
 
   <h2>2. 事件修饰符</h2>
+  <!-- 
+    事件处理的2个重要操作
+    1. 阻止事件的默认行为
+    2. 停止事件冒泡
+  -->
+  <a href="http://www.atguigu.com" @click.prevent="test4">去学习</a>
+  <div style="width: 200px;height: 200px;background: red;" @click="test5">
+    <div style="width: 100px;height: 100px;background: blue;" @click.stop="test6"></div>
+  </div>
+
+  <button @click.once="test7">test</button>
 
   <h2>3. 按键修饰符</h2>
+
+  <input type="text" v-model="msg" @keyup.13="test8">
+  <input type="text" v-model="msg" @keyup.enter="test8">
 
 </div>
 
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
+  new Vue({
+    el: '#example',
+    data: {
+      msg: ''
+    },
 
+    methods: {
+      test1 (event) {
+        alert(event.target.innerHTML)
+      },
+
+      test2 (name) {
+        alert(name)
+      },
+      test3 (name, event) {
+        alert(name + '---' + event.target.innerHTML)
+      },
+      test4 (event) {
+        // event.preventDefault();
+        alert('点击了链接')
+      },
+      test5 (event) {
+        alert('out')
+      },
+      test6 (event) {
+        alert('inner')
+      },
+      test7 () {
+        alert('once')
+      },
+
+      test8 (event) {
+        // if (event.keyCode===13) {
+          alert(this.msg)
+        //}
+      }
+    },
+  })
 </script>
 </body>
 </html>
