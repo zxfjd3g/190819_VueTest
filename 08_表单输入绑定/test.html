@@ -15,39 +15,70 @@
 <div id="demo">
   <form action="/xxx">
     <span>用户名: </span>
-    <input type="text"><br>
+    <input type="text" v-model="user.username"><br>
 
     <span>密码: </span>
-    <input type="password"><br>
+    <input type="password" v-model="user.pwd"><br>
 
     <span>性别: </span>
-    <input type="radio" id="female">
+    <input type="radio" id="female" v-model="user.sex" value="female">
     <label for="female">女</label>
-    <input type="radio" id="male">
+    <input type="radio" id="male" v-model="user.sex" value="male">
     <label for="male">男</label><br>
 
     <span>爱好: </span>
-    <input type="checkbox" id="basket" >
+    <input type="checkbox" id="basket" v-model="user.likes" value="basket">
     <label for="basket">篮球</label>
-    <input type="checkbox" id="foot">
+    <input type="checkbox" id="foot" v-model="user.likes" value="foot">
     <label for="foot">足球</label>
-    <input type="checkbox" id="pingpang">
+    <input type="checkbox" id="pingpang" v-model="user.likes" value="pingpang">
     <label for="pingpang">乒乓</label><br>
 
     <span>城市: </span>
-    <select>
+    <select v-model="user.cityId">
       <option value="">未选择</option>
+      <option v-for="city in allCitys" :key="city.id" :value="city.id">{{city.name}}</option>
     </select><br>
     <span>介绍: </span>
-    <textarea rows="10"></textarea><br><br>
+    <textarea rows="10" v-model="user.info"></textarea><br><br>
 
-    <input type="submit" value="注册">
+    <input type="submit" value="注册" @click.prevent="register">
   </form>
 </div>
 
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
+  new Vue({
+    el: '#demo',
+    data () {
+      return {
+        
+        user: {
+          username: '',
+          pwd: '',
+          sex: 'male',  // male: 男  famale: 女
+          likes: ['foot'],
+          cityId: 5,
+          info: ''
+        },
+        allCitys: [
+          {id: 1, name: 'BJ'},
+          {id: 3, name: 'SH'},
+          {id: 5, name: 'SZ'},
+        ],
+        
+      }
+    },
 
+    methods: {
+      register () {
+        const user = {
+
+        }
+        alert('提交注册的ajax请求 ' + JSON.stringify(this.user))
+      }
+    },
+  })
 </script>
 </body>
 </html>
