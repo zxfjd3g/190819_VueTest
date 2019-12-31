@@ -8,7 +8,7 @@
 <!--
 1. 理解过滤器
   功能: 对要显示的数据进行特定格式化后再显示
-  注意: 并没有改变原本的数据, 可是产生新的对应的数据
+  注意: 并没有改变原本的数据, 是产生新的对应的数据
 2. 编码
   1). 定义过滤器
     Vue.filter(filterName, function(value[,arg1,arg2,...]){
@@ -22,11 +22,30 @@
 <!--需求: 对当前时间进行指定格式显示-->
 <div id="test">
   <h2>显示格式化的日期时间</h2>
+  <p>开始时间: {{startTime}}</p>
+  <p>开始时间(完整): {{startTime | dateFormat}}</p>
+  <p>开始时间(年月日): {{startTime | dateFormat('YYYY-MM-DD')}}</p>
+  <p>开始时间(时分秒): {{startTime | dateFormat('HH:mm:ss')}}</p>
 </div>
 
+<script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.js"></script>
 <script type="text/javascript" src="../js/vue.js"></script>
 <script>
+  // 自定义一个过滤器
+  Vue.filter('dateFormat', function (value, formatStr='YYYY-MM-DD HH:mm:ss') { // value就是需要处理的数据
+    // day-js | moment | date-fns
+    // return moment(value).format(formatStr || 'YYYY-MM-DD HH:mm:ss')
+    return moment(value).format(formatStr)
+  })
 
+  new Vue({
+    el: '#test',
+    data () {
+      return {
+        startTime: Date.now() - 100000
+      }
+    }
+  })
 </script>
 </body>
 </html>

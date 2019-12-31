@@ -39,7 +39,9 @@
     beforeCreate() { // 不能通过vm读取data中的数据
       console.log('beforeCreate()', this.isShow)
     },
+
     // 实现数据代理/data数据的监视(setter)
+    
     created() { // 可以通过vm读取data中的数据
       console.log('created()', this.isShow)
     },
@@ -49,6 +51,7 @@
     },
 
     // 初始第一次显示/渲染界面
+
     /* 
     界面初始显示之后立即回调
     一般在此执行异步操作: 发ajax请求/启动定时器/订阅消息/绑定自定义事件监听
@@ -70,7 +73,9 @@
     beforeUpdate() { // 看到的界面老的界面
       console.log('beforeUpdate()', this.isShow, this.$refs.content.innerText)
     },
+
     // 更新界面
+
     updated() { // 看到的界面新的界面
       console.log('updated()', this.isShow, this.$refs.content.innerText)
     },

@@ -3,6 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <title>10_过渡&动画1</title>
+  <style>
+    /* 指定显示/隐藏的过渡样式 */
+    .xxx-enter-active, .xxx-leave-active {
+      transition: opacity 5s;
+    }
+
+    /* 指定隐藏时的样式 */
+    .xxx-enter, .xxx-leave-to {
+      opacity: 0;
+    }
+
+    /* 指定显示的过渡样式 */
+    .move-enter-active {
+      transition: all 1s;
+    }
+    /* 指定隐藏的过渡样式 */
+    .move-leave-active {
+      transition: all 3s;
+    }
+
+    /* 指定隐藏时的样式 */
+    .move-enter, .move-leave-to {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+
+  </style>
 </head>
 <body>
 <!--
@@ -20,10 +47,40 @@
   xxx-enter: 指定隐藏时的样式
 -->
 
+<div id="demo">
+  <button v-on:click="show = !show">
+    Toggle
+  </button>
+  <transition name="xxx">
+    <p v-show="show">hello</p>
+  </transition>
+</div>
+<div id="demo2">
+  <button v-on:click="show = !show">
+    Toggle
+  </button>
+  <transition name="move">
+    <p v-show="show">hello</p>
+  </transition>
+  
+</div>
+
 
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
+  new Vue({
+    el: '#demo',
+    data: {
+      show: true
+    }
+  })
 
+  new Vue({
+    el: '#demo2',
+    data: {
+      show: true
+    }
+  })
 </script>
 </body>
 </html>
