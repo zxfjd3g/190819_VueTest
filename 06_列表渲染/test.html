@@ -26,6 +26,11 @@
   </ul>
 
   <h2>测试: v-for 遍历对象</h2>
+  <ul>
+    <li v-for="(value, name) in persons[1]" :key="name">
+      {{name}}={{value}}
+    </li>
+  </ul>
 
 </div>
 

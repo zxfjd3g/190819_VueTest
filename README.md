@@ -103,11 +103,14 @@
 # 5. 生命周期
     vm/组件对象
     生命周期图
-        beforeCreate()
+        beforeCreate()  vm.xxx不能读到data中的数据
+        实现数据代理/数据绑定的监视
         created()
-        beforeMount()
+        beforeMount()   vm.$refs.xxx不能读到标签对象
+        初始显示
         mounted()
-        beforeUpdate()
+        beforeUpdate()  读取的只能是老的界面
+        更新界面
         updated()
         beforeDestroy()
         Destroyed()
